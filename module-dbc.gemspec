@@ -1,14 +1,16 @@
 # coding: us-ascii
 
+lib_name = 'module-dbc'.freeze
+
 Gem::Specification.new do |gem|
   # specific
 
-  gem.description   = %q{A trying DbC in Ruby.}
+  gem.description   = %q{An imitation of DbC in Ruby.}
 
   gem.summary       = gem.description.dup
-  gem.homepage      = 'http://kachick.github.com/module-dbc/'
+  gem.homepage      = "https://github.com/kachick/#{lib_name}"
   gem.license       = 'MIT'
-  gem.name          = 'module-dbc'
+  gem.name          = lib_name.dup
   gem.version       = '0.0.1'
 
   gem.required_ruby_version = '>= 2.1'
