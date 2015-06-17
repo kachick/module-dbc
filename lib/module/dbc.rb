@@ -43,7 +43,7 @@ class Module
       prepend(prependable = Module.new do
         define_method origin do |*args, &block|
           if opts.pre?
-            unless opts.pre.call(*args, &block)
+            unless instance_exec(*args, &opts.pre)
               raise PreConditionError, "pre-conditon is invalid: (args: #{args.join ','})"
             end
           end
@@ -63,7 +63,7 @@ class Module
           end
 
           if opts.post?
-            unless opts.post.call(ret)
+            unless instance_exec(ret, &opts.post)
               raise PostConditionError, "post-conditon is invalid: (ret: #{ret})"
             end
           end
