@@ -3,12 +3,12 @@ module-dbc
 
 [![Build Status](https://secure.travis-ci.org/kachick/module-dbc.png)](http://travis-ci.org/kachick/module-dbc)
 [![Gem Version](https://badge.fury.io/rb/module-dbc.png)](http://badge.fury.io/rb/module-dbc)
+[![Dependency Status](https://gemnasium.com/kachick/module-dbc.svg)](https://gemnasium.com/kachick/module-dbc)
 
 Description
 -----------
 
-A trying DbC in Ruby.
-But so hack, I use for debug :)
+An imitation of DbC in Ruby.
 
 Features
 --------
@@ -62,7 +62,7 @@ Link
 
 * [Home](http://kachick.github.com/module-dbc/)
 * [code](https://github.com/kachick/module-dbc)
-* [API](http://kachick.github.com/module-dbc/yard/frames.html)
+* [API](http://www.rubydoc.info/github/kachick/module-dbc)
 * [issues](https://github.com/kachick/module-dbc/issues)
 * [CI](http://travis-ci.org/#!/kachick/module-dbc)
 * [gem](https://rubygems.org/gems/module-dbc)
