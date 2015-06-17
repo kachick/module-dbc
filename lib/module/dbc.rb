@@ -39,40 +39,42 @@ class Module
     def dbc(origin, options={})
       origin = origin.to_sym
       opts = DbCOptArg.parse options
-      snapshot = :"_dbc_origin_#{origin}"
-      alias_method snapshot, origin
-      private snapshot
-      remove_method origin
 
-      define_method origin do |*args, &block|
-        if opts.pre?
-          unless opts.pre.call(*args, &block)
-            raise PreConditionError, "pre-conditon is invalid: (args: #{args.join ','})"
+      prepend(prependable = Module.new do
+        define_method origin do |*args, &block|
+          if opts.pre?
+            unless opts.pre.call(*args, &block)
+              raise PreConditionError, "pre-conditon is invalid: (args: #{args.join ','})"
+            end
           end
-        end
 
-        if opts.invariant?
-          unless instance_exec(&opts.invariant)
-            raise PreInvariantConditionError, "invariant-conditon is invalid"
+          if opts.invariant?
+            unless instance_exec(&opts.invariant)
+              raise PreInvariantConditionError, "invariant-conditon is invalid"
+            end
           end
-        end
 
-        ret = __send__ snapshot, *args, &block
+          ret = super(*args, &block)
 
-        if opts.invariant?
-          unless instance_exec(&opts.invariant)
-            raise PostInvariantConditionError, "invariant-conditon is invalid"
+          if opts.invariant?
+            unless instance_exec(&opts.invariant)
+              raise PostInvariantConditionError, "invariant-conditon is invalid"
+            end
           end
-        end
 
-        if opts.post?
-          unless opts.post.call(ret)
-            raise PostConditionError, "post-conditon is invalid: (ret: #{ret})"
+          if opts.post?
+            unless opts.post.call(ret)
+              raise PostConditionError, "post-conditon is invalid: (ret: #{ret})"
+            end
           end
-        end
 
-        ret
-      end
+          ret
+        end
+      end)
+
+      #For readability on ancestors
+      const_set :"DbC_#{origin}", prependable
+      private_constant :"DbC_#{origin}"
 
       self
     end

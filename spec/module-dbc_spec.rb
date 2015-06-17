@@ -24,5 +24,11 @@ describe Module::DbC do
       @foobar.func(9)
       expect{@foobar.func(9)}.to raise_error(Module::DbC::InvariantConditionError)
     end
+    
+    it 'prepends specific named module' do
+      expect(Module::DbC::SpecHelpers::FooBar.ancestors.first.name).to \
+        eq('Module::DbC::SpecHelpers::FooBar::DbC_func')
+      expect{Module::DbC::SpecHelpers::FooBar::DbC_func}.to raise_error(NameError)
+    end
   end
 end
