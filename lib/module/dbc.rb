@@ -1,3 +1,4 @@
+# coding: us-ascii
 # Copyright (c) 2013 Kenichi Kamiya
 
 require 'optionalargument'
