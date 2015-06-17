@@ -72,7 +72,7 @@ class Module
         end
       end)
 
-      #For readability on ancestors
+      # For readability on ancestors
       const_set :"DbC_#{origin}", prependable
       private_constant :"DbC_#{origin}"
 
