@@ -51,9 +51,17 @@ describe Module::DbC do
           dbc def post_checker
             :ret
           end, post: -> ret{ val == :intance_val }
+          
+          dbc def multiple_arguments(must, df=:def, *rest, kmust:, kdf: :kdf, **krests)
+            :ret
+          end, pre: -> must, df, *rest, kmust:, kdf: :kdf, **krests{ kmust == :km }
         end
         
-        @instance = cls.new      
+        @instance = cls.new
+      end
+      
+      it 'sends arguments from any way' do
+        expect(@instance.multiple_arguments :must, :def2, kmust: :km).to eq(:ret)
       end
 
       context 'preconditions' do
