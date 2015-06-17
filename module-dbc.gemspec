@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'module-dbc'
   gem.version       = '0.0.1'
 
-  gem.required_ruby_version = '>= 1.9.2'
+  gem.required_ruby_version = '>= 2.1'
 
   gem.add_dependency 'optionalargument', '~> 0.1.0'
   
