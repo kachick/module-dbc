@@ -15,16 +15,33 @@ describe Module::DbC do
     it 'raises a PreConditionError if the argument block unmatched to condition' do
       expect{@foobar.func(0)}.to raise_error(Module::DbC::PreConditionError)
     end
+    
+    context 'when the postconditon is a Proc' do
+      it 'raises a PostConditionError if the calculated value unmatched to condition' do
+        expect{@foobar.func(8)}.to raise_error(Module::DbC::PostConditionError)
+      end
+    end
 
-    it 'raises a PostConditionError if the calculated value unmatched to condition' do
-      expect{@foobar.func(8)}.to raise_error(Module::DbC::PostConditionError)
+    context 'when the postconditon is not a Proc' do
+      it 'raises an InvariantConditionError if unmatched to invariant conditions' do
+        obj = Object.new
+        class << obj
+          extend Module::DbC
+          dbc def func(arg)
+            arg + 1
+          end, return: Fixnum
+        end
+
+        expect{obj.func(1.0)}.to raise_error(Module::DbC::PostConditionError)
+        expect(obj.func(1)).to eq(2)
+      end
     end
 
     it 'raises an InvariantConditionError if unmatched to invariant conditions' do
       @foobar.func(9)
       expect{@foobar.func(9)}.to raise_error(Module::DbC::InvariantConditionError)
     end
-    
+
     it 'prepends specific named module' do
       expect(Module::DbC::SpecHelpers::FooBar.ancestors.first.name).to \
         eq('Module::DbC::SpecHelpers::FooBar::DbC_func')

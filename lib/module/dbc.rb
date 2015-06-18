@@ -17,11 +17,11 @@ class Module
     # @return [Class]
     DbCOptArg = OptionalArgument.define {
       opt :precondition,
-          condition: CAN(:call),
+          condition: Proc,
           aliases: [:pre]
 
       opt :postcondition,
-          condition: AND(CAN(:call), ->v{v.arity == 1}),
+          condition: OR(AND(Proc, ->v{v.arity == 1}), CAN(:===)),
           aliases: [:post, :return]
 
       opt :invariant,
@@ -32,12 +32,12 @@ class Module
 
     # @param [Symbol, String, #to_sym] origin
     # @param [Hash] options
-    # @option options [#call] :precondition
-    # @option options [#call] :pre same as :precondition
-    # @option options [#call] :postcondition
-    # @option options [#call] :post same as :postcondition
-    # @option options [#call] :return same as :postcondition
-    # @option options [#call] :invariant
+    # @option options [Proc] :precondition
+    # @option options [Proc] :pre same as :precondition
+    # @option options [Proc, #===] :postcondition
+    # @option options [Proc, #===] :post same as :postcondition
+    # @option options [Proc, #===] :return same as :postcondition
+    # @option options [Proc] :invariant
     # @return [self]
     def dbc(origin, options={})
       origin = origin.to_sym
@@ -66,8 +66,14 @@ class Module
           end
 
           if opts.post?
-            unless instance_exec(ret, &opts.post)
-              raise PostConditionError, "post-conditon is invalid: (ret: #{ret})"
+            if opts.post.kind_of?(Proc)
+              unless instance_exec(ret, &opts.post)
+                raise PostConditionError, "post-conditon is invalid: (return: #{ret})"
+              end
+            else
+              unless opts.post === ret
+                raise PostConditionError, "invalid return value: (return: #{ret}, expected: #{opts.post})"
+              end
             end
           end
 
