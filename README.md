@@ -8,7 +8,7 @@ module-dbc
 Description
 -----------
 
-An imitation of DbC in Ruby.
+An imitation of DbC(Design By Contract) in Ruby.
 
 Features
 --------

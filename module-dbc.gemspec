@@ -5,7 +5,7 @@ lib_name = 'module-dbc'.freeze
 Gem::Specification.new do |gem|
   # specific
 
-  gem.description   = %q{An imitation of DbC in Ruby.}
+  gem.description   = %q{An imitation of DbC(Design By Contract) in Ruby.}
 
   gem.summary       = gem.description.dup
   gem.homepage      = "https://github.com/kachick/#{lib_name}"
