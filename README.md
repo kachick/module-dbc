@@ -28,6 +28,9 @@ class FooBar
     @counter = 1
   end
 
+  attr_reader :counter
+  dbc :counter, return: Integer #=> :return is an alias of :post
+
   dbc def func(arg)
     @counter += 1
     arg + 1
@@ -41,6 +44,7 @@ FooBar.new.func 8 #=> fail post-conditon is invalid: (ret: 9) (Module::DbC::Post
 FooBar.new.func 9 #=> pass
 
 foo = FooBar.new
+foo.counter       #=> 1
 foo.func 11       #=> pass
 foo.func 11       #=> fail invariant-conditon is invalid (Module::DbC::PostInvariantConditionError)
 ```
