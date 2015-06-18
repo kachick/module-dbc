@@ -22,7 +22,7 @@ class Module
 
       opt :postcondition,
           condition: AND(CAN(:call), ->v{v.arity == 1}),
-          aliases: [:post]
+          aliases: [:post, :return]
 
       opt :invariant,
           condition: Proc
@@ -32,8 +32,11 @@ class Module
 
     # @param [Symbol, String, #to_sym] origin
     # @param [Hash] options
-    # @option options [#call] :pre
-    # @option options [#call] :post
+    # @option options [#call] :precondition
+    # @option options [#call] :pre same as :precondition
+    # @option options [#call] :postcondition
+    # @option options [#call] :post same as :postcondition
+    # @option options [#call] :return same as :postcondition
     # @option options [#call] :invariant
     # @return [self]
     def dbc(origin, options={})
