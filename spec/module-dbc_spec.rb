@@ -44,8 +44,25 @@ describe Module::DbC do
 
     it 'prepends specific named module' do
       expect(Module::DbC::SpecHelpers::FooBar.ancestors.first.name).to \
-        eq('Module::DbC::SpecHelpers::FooBar::DbC_func')
-      expect{Module::DbC::SpecHelpers::FooBar::DbC_func}.to raise_error(NameError)
+        eq('Module::DbC::SpecHelpers::FooBar::DbCPrpendable')
+      expect{Module::DbC::SpecHelpers::FooBar::DbCPrpendable}.to raise_error(NameError)
+    end
+    
+    it 'overrides on the single prepended module when called twice' do
+      cls = Class.new do
+        extend Module::DbC
+        dbc def foo
+          :foo
+        end, return: Symbol
+
+        dbc def bar
+          :bar
+        end, return: String
+      end
+
+      expect(cls.ancestors[1]).to equal(cls)
+      expect(cls.new.foo).to eq(:foo)
+      expect{cls.new.bar}.to raise_error(Module::DbC::PostConditionError)
     end
   
     context 'variety of arguments' do

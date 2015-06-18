@@ -42,8 +42,10 @@ class Module
     def dbc(origin, options={})
       origin = origin.to_sym
       opts = DbCOptArg.parse options
+      
+      @_dbc_prependable ||= ( prepend(prependable = Module.new); prependable )
 
-      prepend(prependable = Module.new do
+      @_dbc_prependable.module_exec do
         define_method origin do |*args, &block|
           if opts.pre?
             unless instance_exec(*args, &opts.pre)
@@ -79,11 +81,13 @@ class Module
 
           ret
         end
-      end)
+      end
 
       # For readability on ancestors
-      const_set :"DbC_#{origin}", prependable
-      private_constant :"DbC_#{origin}"
+      unless const_defined? :DbCPrpendable
+        const_set :DbCPrpendable, @_dbc_prependable
+        private_constant :DbCPrpendable
+      end
 
       self
     end
