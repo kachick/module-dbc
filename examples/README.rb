@@ -11,7 +11,7 @@ class FooBar
   end
 
   attr_reader :counter
-  dbc :counter, return: Integer #=> :return is an alias of :post
+  dbc :counter, return: Integer # :return is an alias of :post
 
   dbc def func(arg)
     @counter += 1
