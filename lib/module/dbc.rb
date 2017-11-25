@@ -4,9 +4,7 @@
 require 'optionalargument'
 
 class Module
-
   module DbC
-
     class Error < StandardError; end
     class PreConditionError < Error; end
     class PostConditionError < Error; end
@@ -42,7 +40,7 @@ class Module
     def dbc(origin, options={})
       origin = origin.to_sym
       opts = DbCOptArg.parse options
-      
+
       @_dbc_prependable ||= ( prepend(prependable = Module.new); prependable )
 
       @_dbc_prependable.module_exec do
@@ -91,7 +89,5 @@ class Module
 
       self
     end
-
   end
-
 end
