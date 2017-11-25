@@ -11,16 +11,20 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/kachick/#{lib_name}"
   gem.license       = 'MIT'
   gem.name          = lib_name.dup
-  gem.version       = '0.0.3'
+  gem.version       = '0.0.4'
 
   gem.required_ruby_version = '>= 2.1'
 
   gem.add_dependency 'optionalargument', '~> 0.1'
   
   gem.add_development_dependency 'rspec', '>= 3.3', '< 4'
-  gem.add_development_dependency 'yard', '>= 0.8.7.6', '< 0.9'
+  gem.add_development_dependency 'yard', '>= 0.9.9', '< 2'
   gem.add_development_dependency 'rake', '>= 10', '< 20'
   gem.add_development_dependency 'bundler', '>= 1.10', '< 2'
+
+  if RUBY_ENGINE == 'rbx'
+    gem.add_dependency 'rubysl', '>= 2.2'
+  end
 
   # common
 

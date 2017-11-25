@@ -52,7 +52,7 @@ foo.func 11       #=> fail invariant-conditon is invalid (Module::DbC::PostInvar
 Requirements
 -------------
 
-* Ruby - [2.1 or later](http://travis-ci.org/#!/kachick/module-dbc)
+* Ruby - [2.2 or later](http://travis-ci.org/#!/kachick/module-dbc)
 
 Install
 -------

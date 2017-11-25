@@ -29,7 +29,7 @@ describe Module::DbC do
           extend Module::DbC
           dbc def func(arg)
             arg + 1
-          end, return: Fixnum
+          end, return: Integer
         end
 
         expect{obj.func(1.0)}.to raise_error(Module::DbC::PostConditionError)
