@@ -1,9 +1,9 @@
 module-dbc
 ===========
 
-[![Build Status](https://secure.travis-ci.org/kachick/module-dbc.png)](http://travis-ci.org/kachick/module-dbc)
-[![Gem Version](https://badge.fury.io/rb/module-dbc.png)](http://badge.fury.io/rb/module-dbc)
-[![Dependency Status](https://gemnasium.com/kachick/module-dbc.svg)](https://gemnasium.com/kachick/module-dbc)
+* ***This repository is archived***
+* ***No longer maintained***
+* ***All versions have been yanked from https://rubygems.org for releasing valuable namespace for others***
 
 Description
 -----------
@@ -53,23 +53,6 @@ Requirements
 -------------
 
 * Ruby - [2.2 or later](http://travis-ci.org/#!/kachick/module-dbc)
-
-Install
--------
-
-```bash
-gem install module-dbc
-```
-
-Link
-----
-
-* [Home](http://kachick.github.com/module-dbc/)
-* [code](https://github.com/kachick/module-dbc)
-* [API](http://www.rubydoc.info/github/kachick/module-dbc)
-* [issues](https://github.com/kachick/module-dbc/issues)
-* [CI](http://travis-ci.org/#!/kachick/module-dbc)
-* [gem](https://rubygems.org/gems/module-dbc)
 
 License
 --------
