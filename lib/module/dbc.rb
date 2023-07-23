@@ -47,13 +47,13 @@ class Module
         define_method origin do |*args, &block|
           if opts.pre?
             unless instance_exec(*args, &opts.pre)
-              raise PreConditionError, "pre-conditon is invalid: (args: #{args.join ','})"
+              raise PreConditionError, "pre-condition is invalid: (args: #{args.join ','})"
             end
           end
 
           if opts.invariant?
             unless instance_exec(&opts.invariant)
-              raise PreInvariantConditionError, "invariant-conditon is invalid"
+              raise PreInvariantConditionError, "invariant-condition is invalid"
             end
           end
 
@@ -61,14 +61,14 @@ class Module
 
           if opts.invariant?
             unless instance_exec(&opts.invariant)
-              raise PostInvariantConditionError, "invariant-conditon is invalid"
+              raise PostInvariantConditionError, "invariant-condition is invalid"
             end
           end
 
           if opts.post?
             if opts.post.kind_of?(Proc)
               unless instance_exec(ret, &opts.post)
-                raise PostConditionError, "post-conditon is invalid: (return: #{ret})"
+                raise PostConditionError, "post-condition is invalid: (return: #{ret})"
               end
             else
               unless opts.post === ret

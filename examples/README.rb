@@ -21,11 +21,11 @@ class FooBar
        invariant: ->{ @counter < 3 }
 end
 
-#FooBar.new.func 0 #=> fail pre-conditon is invalid: (args: 0) (Module::DbC::PreConditionError)
-#FooBar.new.func 8 #=> fail post-conditon is invalid: (ret: 9) (Module::DbC::PostConditionError)
+#FooBar.new.func 0 #=> fail pre-condition is invalid: (args: 0) (Module::DbC::PreConditionError)
+#FooBar.new.func 8 #=> fail post-condition is invalid: (ret: 9) (Module::DbC::PostConditionError)
 FooBar.new.func 9 #=> pass
 
 foo = FooBar.new
 p(foo.counter)       #=> 1
 p(foo.func 11)       #=> pass
-p(foo.func 11)       #=> fail invariant-conditon is invalid (Module::DbC::PostInvariantConditionError)
+p(foo.func 11)       #=> fail invariant-condition is invalid (Module::DbC::PostInvariantConditionError)
