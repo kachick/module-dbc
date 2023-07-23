@@ -4,7 +4,7 @@ gemspec
 
 gem 'optionalargument', github: 'kachick/optionalargument'
 
-group :development do
+group :development, :test do
   gem 'rake'
 end
 
