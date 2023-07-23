@@ -52,7 +52,7 @@ foo.func 11       #=> fail invariant-condition is invalid (Module::DbC::PostInva
 Requirements
 -------------
 
-* Ruby - [2.2 or later](http://travis-ci.org/#!/kachick/module-dbc)
+* Ruby - 3.1 or higher
 
 License
 --------

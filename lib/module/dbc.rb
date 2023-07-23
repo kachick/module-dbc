@@ -44,9 +44,9 @@ class Module
       @_dbc_prependable ||= ( prepend(prependable = Module.new); prependable )
 
       @_dbc_prependable.module_exec do
-        define_method origin do |*args, &block|
+        define_method origin do |*args, **kargs, &block|
           if opts.pre?
-            unless instance_exec(*args, &opts.pre)
+            unless instance_exec(*args, **kargs, &opts.pre)
               raise PreConditionError, "pre-condition is invalid: (args: #{args.join ','})"
             end
           end
@@ -57,7 +57,7 @@ class Module
             end
           end
 
-          ret = super(*args, &block)
+          ret = super(*args, **kargs, &block)
 
           if opts.invariant?
             unless instance_exec(&opts.invariant)
