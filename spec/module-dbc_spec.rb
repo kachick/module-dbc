@@ -75,16 +75,16 @@ describe Module::DbC do
           end
 
           def val
-            :intance_val
+            :instance_val
           end
 
           dbc def pre_checker
             :ret
-          end, pre: -> { val == :intance_val }
+          end, pre: -> { val == :instance_val }
 
           dbc def post_checker
             :ret
-          end, post: -> ret{ val == :intance_val }
+          end, post: -> ret{ val == :instance_val }
 
           dbc def multiple_arguments(must, df=:def, *rest, kmust:, kdf: :kdf, **krests)
             :ret
